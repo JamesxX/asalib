@@ -1,0 +1,32 @@
+{
+	"morphisms" : {
+		"Mordecai" : {
+			"A" : "AB",
+			"B" : "B"
+		},
+
+		"Mordred" : {
+			"A" : "ABA",
+			"B" : "BBB"
+		},
+
+		"Moriarty" : {
+			"A" : "ABB",
+			"B" : "BA"
+		},
+
+		"Morpheus" : {
+			"A" : "AB",
+			"B" : "BA"
+		}
+	},
+
+	"settings" : {
+		"lengthBound" : 1000,
+		"startWords" : [
+			"A",
+			"B"
+		]
+	}
+
+}
