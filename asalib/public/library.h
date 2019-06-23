@@ -19,10 +19,29 @@
 #define asalib_wait_debug()
 #endif
 
+#if defined _WIN32 || defined __CYGWIN__
 #ifdef ASALIB_COMPILE
-#define asalib __declspec(dllexport) 
+#ifdef __GNUC__
+#define asalib __attribute__ ((dllexport))
 #else
-#define asalib __declspec(dllimport) 
+#define asalib __declspec(dllexport)
+#endif
+#else
+#ifdef __GNUC__
+#define asalib __attribute__ ((dllimport))
+#else
+#define asalib __declspec(dllimport)
+#endif
+#endif
+#define asalib_local
+#else
+#if __GNUC__ >= 4
+#define asalib __attribute__ ((visibility ("default")))
+#define asalib_local  __attribute__ ((visibility ("hidden")))
+#else
+#define asalib
+#define asalib_local
+#endif
 #endif
 
 namespace AbelianSquaresAnalysis {

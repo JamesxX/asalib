@@ -107,6 +107,7 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -125,6 +126,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -141,6 +143,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -160,6 +163,7 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

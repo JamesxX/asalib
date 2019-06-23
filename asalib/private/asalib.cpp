@@ -5,4 +5,4 @@
 
 #include <asalib/public/library.h>
 
-asalib const char* AbelianSquaresAnalysis::BUILD = __TIMESTAMP__;
+asalib const char* AbelianSquaresAnalysis::BUILD = "1.3";

@@ -19,12 +19,17 @@ namespace AbelianSquaresAnalysis {
 		/// @brief Input structure for AbelianSquaresAnalysis::prefix::AnalyseSubstring
 		struct substringAnalysisInput {
 			types::word word; ///< substring to analyse.
-			size_t length; ///< length of substring.
-			size_t position; ///< Start position of string in parent prefix.
+			size_t length = 0; ///< length of substring.
+			size_t position = 0; ///< Start position of string in parent prefix.
+			types::parihkVector alphabet;
 		};
 
 		/// @brief Structure containing information for a substring of a prefix. This is currently only used internally.
 		struct substringAnalysisOutput : public substringAnalysisInput {
+
+			asalib substringAnalysisOutput();
+			asalib substringAnalysisOutput(const substringAnalysisInput& base);
+
 			types::boolean isSquare = false; ///< If the substring is an abelian square. If false, other members may not be set.
 			types::boolean isTrivial = false; ///< If the substring is a trivial abelian square.
 			types::parihkVector vector; ///< Parihk vector of the abelian square.

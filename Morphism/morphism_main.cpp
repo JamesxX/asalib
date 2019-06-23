@@ -12,9 +12,7 @@
 #include <common/tclap/CmdLine.h>
 #include <iostream>
 
-using json = nlohmann::json;
-using namespace AbelianSquaresAnalysis::morphism;
-using namespace AbelianSquaresAnalysis::utility;
+using namespace AbelianSquaresAnalysis;
 
 #define asalib_VERBOSE(v,...) if (v) printf(##__VA_ARGS__)
 
@@ -41,11 +39,11 @@ int main(int argc, char* argv[]) {
 
 		// Load input from json
 		asalib_VERBOSE(verboseOption, "Loading into program from file \"%s\"\n", input_file.c_str());
-		morphismInput input_cpp = LoadClassFromFile<morphismInput>(input_file);
+		morphism::morphismInput input_cpp = utility::LoadClassFromFile<morphism::morphismInput>(input_file);
 
 		// Run morphism!
 		asalib_VERBOSE(verboseOption, "Running morphisms . . .\n");
-		std::vector<morphismOutput> output = RunMorphisms(input_cpp);
+		std::vector<morphism::morphismOutput> output = morphism::RunMorphisms(input_cpp);
 #ifdef _WIN64
 		asalib_VERBOSE(verboseOption, "%llu morphisms iterated\n", output.size());
 #else
@@ -54,12 +52,12 @@ int main(int argc, char* argv[]) {
 
 		// Prepare output directory
 		asalib_VERBOSE(verboseOption, "Preparing output directory\n");
-		std::string parent_directory = GetParentDirectory(input_file);
+		std::string parent_directory = utility::GetParentDirectory(input_file);
 		if (outputRelativityOption) {
 			asalib_VERBOSE(verboseOption, "Output is relative to executable\n");
-			parent_directory = CurrentExecutablePath();
+			parent_directory = utility::CurrentExecutablePath();
 		}
-		std::string outputDirectory = PrepareSubdirectory(parent_directory, output_directory);
+		std::string outputDirectory = utility::PrepareSubdirectory(parent_directory, output_directory);
 
 		// for each generated prefix
 		for (const auto& output_entry : output) {
@@ -67,7 +65,7 @@ int main(int argc, char* argv[]) {
 			// Output to file
 			std::string file_location = outputDirectory + "\\" + output_entry.input.morphismName + output_entry.input.startWord + ".out";
 			asalib_VERBOSE(verboseOption, "Generating output file \"%s\"\n", file_location.c_str());
-			SaveClassToFile<morphismOutput>(file_location, output_entry);
+			utility::SaveClassToFile<morphism::morphismOutput>(file_location, output_entry);
 
 		}
 

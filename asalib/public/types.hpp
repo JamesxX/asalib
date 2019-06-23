@@ -4,110 +4,137 @@
 /// @brief Common header for library, defining commonly used types.
 
 #pragma once
+#include "library.h"
 #include <string>
 #include <map>
-
-//#include <common/iterator_tpl.h>
+#include <common/json.hpp>
 
 namespace AbelianSquaresAnalysis {
 
 	namespace types {
 
-		typedef bool boolean; ///< Internally used type for consistency between builds.
-		typedef std::string word; ///< Type containing words, substrings and prefixes.
-		typedef std::map<types::word, types::word> mapping; ///< Type containing morphism information.
-		typedef std::map<std::string, mapping> morphism_list; ///< Type containing a list of morphisms.
+		typedef unsigned int length; ///< Internally used type for consistency between builds.
 
 #ifdef _WIN64
-		typedef unsigned int length; ///< Internally used type for consistency between builds.
 		typedef unsigned long long int integer; ///< Internally used type for consistency between builds.
 #else
-		typedef unsigned int length; ///< Internally used type for consistency between builds.
 		typedef unsigned long int integer; ///< Internally used type for consistency between builds.
 #endif
 
-		/// @brief Structure used to store information about a given substring, currently limited to alphabets of size 2.
-		/// @todo Allow greater alphabet sizes.
-		struct parihkVector {
-			types::integer a = 0; ///< Counter of instances of first alphabet letter.
-			types::integer b = 0; ///< Counter of instances of second alphabet letter.
-		};
-
-		//typedef std::map<char,unsigned int> characterCount;
-		/*typedef parihkVector characterCount;
-
-		class word {
-		private:
-			size_t _length = 0;
-			char* _c_str;
-			void initialize_c_str(const char* s);
-			void initialize_c_str(const char* s, size_t length);
+		/// @brief Structure used to store information about a given substring, for arbitrary alphabet sizes.
+		class parihkVector : public std::map<char, types::integer> {
 		public:
 
-			word(const char* s = "");
-			word(const char* s, size_t length);
-			word(const types::word& other); // copy constructor
-			word(const std::string& other);
-			~word();
+			/// @brief Default constructor for parihkVector class
+			parihkVector();
 
-			types::length length() const;
-			types::word substr(types::length position);
-			types::word substr(types::length position, size_t length);
-			types::characterCount countOccurences();
-			char at(size_t position) const;
+			/// @brief Builds the string representation of a parihk vector, used in detail output.
+			/// @return String representation of parihk vector.
+			inline operator std::string() {
+				bool first = true;
+				std::string output = "(";
+				for (const auto& entry : *this) {
+					if (!first) {
+						output += ", ";
+					}
+					output += std::to_string(entry.second);
+					first = false;
+				}
+				output += ")^2";
+				return output;
+			}
 
-			inline bool operator==(const types::word& right) const;
-			inline bool operator!=(const types::word& right) const;
-			inline bool operator<(const types::word& right) const;
-			inline bool operator>(const types::word& right) const;
-			inline bool operator<=(const types::word& right) const;
-			inline bool operator>=(const types::word& right) const;
+			/// @brief Comparison function between two parihk vectors. Commutitive.
+			/// @param[in] other Other parihk vector with which to compare.
+			/// @return Are the two parihk vectors equal.
+			inline bool operator==(const types::parihkVector& other) const {
+				return this->size() == other.size()
+					&& std::equal(this->begin(), this->end(), other.begin())
+					&& std::equal(other.begin(), other.end(), this->begin());
+			}
 
-			inline operator std::string();
+			/// @brief Comparison function between two parihk vectors. Non-commutitive.
+			///
+			/// This function is used in the sorting algorithm when finding non-equivalent squares.
+			/// This shouldn't be used generally.
+			/// @param[in] other Other parihk vector with which to compare.
+			/// @return bool Is the parihk vector greater than another.
+			inline bool operator>(const types::parihkVector& other) const {
+				for (const auto& entry : *this) {
+					auto it = other.find(entry.first);
+					if (it == other.end()) return true;
+					if (entry.second != other.at(entry.first)) {
+						return entry.second > other.at(entry.first);
+					}
+				}
+				return false;
+			}
 
-			inline types::word& operator=(const types::word& other); // coppy assingment
+			/// @brief Utility function for determining if the parihk vector denotes a trivial square.
+			/// @return Is the parihk vector one of a trivial square.
+			bool asalib isTrivial() const;
+		};
 
-			STL_TYPEDEFS(char);
+		/// @brief Function designed for use by nlohmann::json to convert AbelianSquaresAnalysis::types::parihkVector to JSON.
+		/// @param[out] j JSON object.
+		/// @param[in] data input AbelianSquaresAnalysis::types::parihkVector.
+		/// @see AbelianSquaresAnalysis::types::parihkVector.
+		void asalib to_json(nlohmann::json& j, const types::parihkVector& data);
 
-			struct iterator_state {
-				int pos;
-				inline void next(const types::word* ref);
-				inline void prev(const types::word* ref);
-				inline void begin(const types::word* ref);
-				inline void end(const types::word* ref);
-				inline char& get(types::word* ref);
-				inline const char& get(const types::word* ref);
-				inline bool cmp(const iterator_state& s) const;
-			};
-			
-			// Mutable Iterator:
-			typedef iterator_tpl::iterator<types::word, char&, iterator_state> iterator;
-			iterator begin();
-			iterator end();
+		/// @brief Function designed for use by nlohmann::json to convert AbelianSquaresAnalysis::types::parihkVector from JSON.
+		/// @param[in] j JSON object.
+		/// @param[out] data input AbelianSquaresAnalysis::types::parihkVector.
+		/// @see AbelianSquaresAnalysis::types::parihkVector.
+		void asalib from_json(const nlohmann::json& j, types::parihkVector& data);
 
-			// Const Iterator:
-			typedef iterator_tpl::const_iterator<types::word, char&, iterator_state> const_iterator;
-			const_iterator begin() const;
-			const_iterator end() const;
+		/// @brief Class extension of std::string to represent words internally.
+		///
+		/// This class implements several utility functions in order to simplify algorithms.
+		class word : public std::string {
+		public:
 
-			// Reverse `iterator_state`:
-			struct reverse_iterator_state : public iterator_state {
-				inline void next(const types::word* ref);
-				inline void prev(const types::word* ref);
-				inline void begin(const types::word* ref);
-				inline void end(const types::word* ref);
-			};
+			/// @brief Default constructor for types::word class
+			inline word() : word("") {}
 
-			// Mutable Reverse Iterator:
-			typedef iterator_tpl::iterator<types::word, char&, reverse_iterator_state> reverse_iterator;
-			reverse_iterator rbegin();
-			reverse_iterator rend();
+			/// @brief Constructor of types:word class with initial string value.
+			///
+			/// This function sanitizes the input to reduce algorithm cost later.
+			/// @param[in] in Initial value that types::word class holds.
+			inline word(std::string in): std::string(in)
+			{
+				std::transform(this->begin(), this->end(), this->begin(), ::tolower);
+			}
 
-			// Const Reverse Iterator:
-			typedef iterator_tpl::const_iterator<types::word, char&, reverse_iterator_state> const_reverse_iterator;
-			const_reverse_iterator rbegin() const;
-			const_reverse_iterator rend() const;
-		};*/
+			/// @brief Counts the number of different characters in a word, and constructs a copyable parihkVector
+			/// representing said alphabet.
+			/// @return empty parihk vector representing alphabet size.
+			types::parihkVector asalib countAlphabetSize();
+
+			/// @brief Counts the occurence of different characters in word for a given alphabet.
+			/// @warning When analyzing substrings of a greater word, the input parihk vector must be a copy construct parihk vector of the alphabet over the parent word!
+			/// @param[in] offset start point of occurences count.
+			/// @param[in] count number of positions to check.
+			/// @param[in/out] out Modified alphabet parihk vector counting occurences of given characters.
+			void countOccurences(size_t offset, size_t count, types::parihkVector& out);
+		};
+
+		/// @brief Function designed for use by nlohmann::json to convert AbelianSquaresAnalysis::types::word to JSON.
+		/// @param[out] j JSON object.
+		/// @param[in] data input AbelianSquaresAnalysis::types::word.
+		/// @see AbelianSquaresAnalysis::types::word.
+		void asalib to_json(nlohmann::json& j, const types::word& data);
+
+		/// @brief Function designed for use by nlohmann::json to convert AbelianSquaresAnalysis::types::word from JSON.
+		/// @param[in] j JSON object.
+		/// @param[out] data input AbelianSquaresAnalysis::types::word.
+		/// @see AbelianSquaresAnalysis::types::word.
+		void asalib from_json(const nlohmann::json& j, types::word& data);
+
+		typedef bool boolean; ///< Internally used type for consistency between builds.
+		typedef std::map<types::word, types::word> mapping; ///< Type containing morphism information.
+		typedef std::map<std::string, mapping> morphism_list; ///< Type containing a list of morphisms.
+
+
 	}
 
 }

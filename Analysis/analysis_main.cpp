@@ -12,10 +12,7 @@
 #include <common/tclap/CmdLine.h>
 #include <iostream>
 
-using json = nlohmann::json;
-using namespace AbelianSquaresAnalysis::morphism;
-using namespace AbelianSquaresAnalysis::prefix;
-using namespace AbelianSquaresAnalysis::utility;
+using namespace AbelianSquaresAnalysis;
 
 #define asalib_VERBOSE(v,...) if (v) printf(##__VA_ARGS__)
 
@@ -41,27 +38,27 @@ int main(int argc, char* argv[]) {
 
 		// Load input from json
 		asalib_VERBOSE(verboseOption, "Loading into program from file \"%s\"\n", input_file.c_str());
-		morphismOutput input_cpp = LoadClassFromFile<morphismOutput>(input_file);
+		morphism::morphismOutput input_cpp = utility::LoadClassFromFile<morphism::morphismOutput>(input_file);
 
 		// Analyse prefix
 		asalib_VERBOSE(verboseOption, "Analysing prefix . . .\n");
-		prefixAnalysisOutput analysisOutput(input_cpp);
-		AnalysePrefix(analysisOutput.generatedPrefix, analysisOutput);
+		prefix::prefixAnalysisOutput analysisOutput(input_cpp);
+		prefix::AnalysePrefix(analysisOutput.generatedPrefix, analysisOutput);
 		asalib_VERBOSE(verboseOption, "Analysis complete!\n");
 
 		// Prepare output directory
 		asalib_VERBOSE(verboseOption, "Preparing output directory\n");
-		std::string parent_directory = GetParentDirectory(input_file);
+		std::string parent_directory = utility::GetParentDirectory(input_file);
 		if (outputRelativityOption) {
 			asalib_VERBOSE(verboseOption, "Output is relative to executable\n");
-			parent_directory = CurrentExecutablePath();
+			parent_directory = utility::CurrentExecutablePath();
 		}
-		std::string outputDirectory = PrepareSubdirectory(parent_directory, output_directory);
+		std::string outputDirectory = utility::PrepareSubdirectory(parent_directory, output_directory);
 
 		// Output to file
 		std::string file_location = outputDirectory + "\\" + analysisOutput.input.morphismName + analysisOutput.input.startWord + ".json";
 		printf("Generating output file \"%s\"\n", file_location.c_str());
-		SaveClassToFile<prefixAnalysisOutput>(file_location, analysisOutput);
+		utility::SaveClassToFile<prefix::prefixAnalysisOutput>(file_location, analysisOutput);
 
 		asalib_VERBOSE(verboseOption, "Program completed successfull\n");
 		asalib_wait_debug();

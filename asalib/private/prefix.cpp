@@ -10,18 +10,28 @@
 #include <algorithm>
 #include <common/json.hpp>
 
+#define asalib_prefix_MULTITHREAD
+
 using namespace AbelianSquaresAnalysis;
+
+asalib  AbelianSquaresAnalysis::prefix::substringAnalysisOutput::substringAnalysisOutput()
+	: vector()
+{
+}
+
+asalib  AbelianSquaresAnalysis::prefix::substringAnalysisOutput::substringAnalysisOutput(const prefix::substringAnalysisInput& base)
+	: prefix::substringAnalysisInput(base), vector()
+{
+}
 
 asalib AbelianSquaresAnalysis::prefix::prefixAnalysisOutput::prefixAnalysisOutput(const morphism::morphismOutput& base)
 	: morphism::morphismOutput(base)
 {
-	// Copy construct prefixAnalysisOutput
 }
 
 asalib AbelianSquaresAnalysis::prefix::prefixAnalysisOutput::prefixAnalysisOutput(const morphism::morphismOutput& base, const prefix::AnalysePrefixOutput& base2)
 	: morphism::morphismOutput(base), prefix::AnalysePrefixOutput(base2)
 {
-	// Copy construct prefixAnalysisOutput
 }
 
 #define asalib_prefixanalysis_output_category(name, info)\
@@ -40,14 +50,14 @@ void asalib AbelianSquaresAnalysis::prefix::to_json(nlohmann::json& j, const pre
 		{"success", data.morphismSuccess},
 		{"startWord", data.input.startWord},
 		{"lengthBound", data.input.lengthBound},
-		{"generatedPrefix", data.generatedPrefix},
+		{"generatedPrefix",data.generatedPrefix},
 		{"generatedPrefixLength", data.generatedPrefixLength},
 		{"generatedPrefixRuns", data.runs},
 		{"prefixAnalysis",{
 			asalib_prefixanalysis_output_category("totalSquares", data.total),
 			asalib_prefixanalysis_output_category("distinctSquares", data.distinct),
 			asalib_prefixanalysis_output_category("nonequivalentSquares", data.nonequivalent),
-			{"totalN_less_than_length_over_four", (data.nonequivalent.trivial + data.nonequivalent.nontrivial) < floor(data.generatedPrefixLength / 4)}
+			{"totalN_less_than_length_over_four", ((long)data.nonequivalent.trivial + (long)data.nonequivalent.nontrivial) < floor((long)data.generatedPrefixLength / 4)}
 		}}
 	};
 }
@@ -57,7 +67,7 @@ void asalib AbelianSquaresAnalysis::prefix::to_json(nlohmann::json& j, const pre
 prefix::substringAnalysisOutput asalib AbelianSquaresAnalysis::prefix::AnalyseSubstring(substringAnalysisInput input) {
 	
 	// Setup return information
-	prefix::substringAnalysisOutput output;
+	prefix::substringAnalysisOutput output = (prefix::substringAnalysisOutput) input;
 
 	// odd length substrings are not squares
 	if (input.word.length() % 2 != 0) {
@@ -65,32 +75,17 @@ prefix::substringAnalysisOutput asalib AbelianSquaresAnalysis::prefix::AnalyseSu
 	}
 
 	// Count first half
-	types::parihkVector firstHalf;
-	std::string firstHalfSubString = input.word.substr(0, input.length / 2);
-	firstHalf.a = asalib_prefix_substringanalysis_count_occurence(firstHalfSubString, 'a');
-	firstHalf.b = asalib_prefix_substringanalysis_count_occurence(firstHalfSubString, 'b');
-	//types::parihkVector firstHalf = substring.substr(0, substring.length() / 2).countOccurences();
+	types::parihkVector firstHalf = input.alphabet; // copy construct
+	input.word.countOccurences(0, input.length / 2, firstHalf);
 
 	// Count second half
-	types::parihkVector secondHalf;
-	std::string secondHalfSubString = input.word.substr(input.length / 2, std::string::npos);
-	secondHalf.a = asalib_prefix_substringanalysis_count_occurence(secondHalfSubString, 'a');
-	secondHalf.b = asalib_prefix_substringanalysis_count_occurence(secondHalfSubString, 'b');
-	//types::parihkVector secondHalf = substring.substr(substring.length() / 2).countOccurences();
+	types::parihkVector secondHalf = input.alphabet; // copy construct
+	input.word.countOccurences(input.length / 2, std::string::npos, secondHalf);
 
-	// substring is square if vectors for each side are equal
-	if (firstHalf.a == secondHalf.a && firstHalf.b == secondHalf.b) {
+	if (firstHalf == secondHalf) {
 		output.isSquare = true;
-		output.vector.a = firstHalf.a;
-		output.vector.b = firstHalf.b;
-
-		if (firstHalf.a == 0 || firstHalf.b == 0) {
-			output.isTrivial = true;
-		}
-
-		output.word = input.word;
-		output.position = input.position;
-		output.length = input.length;
+		output.vector = firstHalf;
+		output.isTrivial = firstHalf.isTrivial();
 	}
 
 	return output;
@@ -106,10 +101,11 @@ prefix::prefixAnalysisOutput asalib AbelianSquaresAnalysis::prefix::AnalysePrefi
 void asalib AbelianSquaresAnalysis::prefix::AnalysePrefix(types::word input, prefix::AnalysePrefixOutput& output) {
 
 	// Prepare thread pool
+#ifdef asalib_prefix_MULTITHREAD
 	AbelianSquaresAnalysis::ThreadPool<prefix::substringAnalysisInput, prefix::substringAnalysisOutput> pool;
+#endif
 
-	// Sanitize input
-	std::transform(input.begin(), input.end(), input.begin(), ::tolower);
+	types::parihkVector alphabet = input.countAlphabetSize();
 
 	// For every even word length
 	for (unsigned int len = 2; len <= input.length(); len += 2) {
@@ -119,17 +115,26 @@ void asalib AbelianSquaresAnalysis::prefix::AnalysePrefix(types::word input, pre
 			AnalysisInput.word = input.substr(pos, len);
 			AnalysisInput.length = len;
 			AnalysisInput.position = pos;
+			AnalysisInput.alphabet = alphabet;
 
+#ifdef asalib_prefix_MULTITHREAD
 			pool.AddTask(prefix::AnalyseSubstring, AnalysisInput);
+#else
+			prefix::substringAnalysisOutput computation_output  = prefix::AnalyseSubstring(AnalysisInput);
+			if (computation_output.isSquare)
+				output.total.list.push_back(computation_output);
+#endif
 		}
 	}
 
+#ifdef asalib_prefix_MULTITHREAD
 	pool.WaitForTasks();
 
 	for (auto& computation_output : pool.GetResults()) {
 		if (computation_output.isSquare)
 			output.total.list.push_back(computation_output);
 	}
+#endif
 
 	prefix::SquaresCountTrivials(output.total);
 
@@ -160,15 +165,12 @@ bool asalib AbelianSquaresAnalysis::prefix::SquaresSortDistinctPredicate
 
 bool asalib AbelianSquaresAnalysis::prefix::SquaresComparisonNoneqPredicate
 (prefix::substringAnalysisOutput left, prefix::substringAnalysisOutput right) {
-	return (left.vector.a == right.vector.a && left.vector.b == right.vector.b);
+	return (left.vector == right.vector);
 }
 
 bool asalib AbelianSquaresAnalysis::prefix::SquaresSortNoneqPredicate
 (prefix::substringAnalysisOutput left, prefix::substringAnalysisOutput right) {
-	if (left.vector.a != right.vector.a) {
-		return left.vector.a > right.vector.a;
-	}
-	return left.vector.b > right.vector.b;
+	return (left.vector > right.vector);
 }
 
 asalib AbelianSquaresAnalysis::prefix::SquaresCategoriseInput::SquaresCategoriseInput(std::vector<substringAnalysisOutput>& in, std::vector<substringAnalysisOutput>& out):

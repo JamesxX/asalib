@@ -7,11 +7,11 @@
 
 #include <asalib/public/library.h>
 #include <asalib/public/prefix.hpp>
+#include <asalib/public/types.hpp>
 #include <common/tclap/CmdLine.h>
 #include <iostream>
 #include <string>
 
-using json = nlohmann::json;
 using namespace AbelianSquaresAnalysis;
 
 #define asalib_VERBOSE(v,...) if (v) printf(##__VA_ARGS__)
@@ -20,18 +20,18 @@ using namespace AbelianSquaresAnalysis;
 #define asalib_singleword_dictionary_found "\tFound %llu "
 #define asalib_singleword_dictionary_ofwhich "\t\tOf which %llu trivial and %llu non-trivial.\n"
 #define asalib_singleword_dictionary_detailedinformation "\t\tOutputing detailed information:\n"
-#define asalib_singleword_dictionary_detail "\t\t\t\"%s\" at position %zu, (%llu,%llu)\n"
+#define asalib_singleword_dictionary_detail "\t\t\t\"%s\" at position %zu, %s\n"
 #else
 #define asalib_singleword_dictionary_found "\tFound %lu "
 #define asalib_singleword_dictionary_ofwhich "\t\tOf which %lu trivial and %lu non-trivial.\n"
 #define asalib_singleword_dictionary_detailedinformation "\t\tOutputing detailed information on total squares:\n"
-#define asalib_singleword_dictionary_detailed "\t\t\t\"%s\" at position %zu, (%lu,%lu)\n"
+#define asalib_singleword_dictionary_detail "\t\t\t\"%s\" at position %zu, %s\n"
 #endif
 
 inline void PrintDetailedInformationOnType(prefix::prefixAnalysisOutputSquareType& typeOutput) {
 	printf(asalib_singleword_dictionary_detailedinformation);
-	for (const auto& square : typeOutput.list) {
-		printf(asalib_singleword_dictionary_detail, square.word.c_str(), square.position, square.vector.a, square.vector.b);
+	for (auto& square : typeOutput.list) {
+		printf(asalib_singleword_dictionary_detail, square.word.c_str(), square.position, ((std::string)square.vector).c_str());
 	}
 }
 

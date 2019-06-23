@@ -41,14 +41,14 @@ namespace AbelianSquaresAnalysis {
 				std::string morphismName; ///< Name of the applied morphism.
 				AbelianSquaresAnalysis::types::mapping morphism; ///< Mappings of applied morphism.
 				AbelianSquaresAnalysis::types::word startWord; ///< Start word to which morphism was applied
-				AbelianSquaresAnalysis::types::length lengthBound; ///< Requested minimum length when generating prefix.
+				AbelianSquaresAnalysis::types::length lengthBound = 0; ///< Requested minimum length when generating prefix.
 			} input; ///< Settings given to morphism iterator.
 			struct morphismAnalysis {
 				std::vector<std::string> prolongable; ///< Vector of mappings which are prolongable.
 				size_t k_uniform = 0; ///< k-uniformity of morphism, where 0 is no uniformity.
 			} morphismAnalysis; ///< Results of analysis on morphism itself.
 			AbelianSquaresAnalysis::types::word generatedPrefix; ///< Prefix generated from application of morphism onto startword for a number of iterations so as to provide a prefix of atleast lengthBound length.
-			size_t generatedPrefixLength; ///< Length of generated prefix. Equal or greater than lengthBound where morphismSuccess is true.
+			size_t generatedPrefixLength = 0; ///< Length of generated prefix. Equal or greater than lengthBound where morphismSuccess is true.
 			AbelianSquaresAnalysis::types::length runs = 0; ///< Number of iterations required to achieve length greater of equal to lengthBound.
 		};
 
