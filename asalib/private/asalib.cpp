@@ -5,4 +5,4 @@
 
 #include <asalib/public/library.h>
 
-asalib const char* AbelianSquaresAnalysis::BUILD = "1.3";
+asalib const char* AbelianSquaresAnalysis::BUILD = "1.3b";

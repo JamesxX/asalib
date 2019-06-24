@@ -21,13 +21,17 @@ namespace AbelianSquaresAnalysis {
 			types::word word; ///< substring to analyse.
 			size_t length = 0; ///< length of substring.
 			size_t position = 0; ///< Start position of string in parent prefix.
-			types::parihkVector alphabet;
+			types::parihkVector alphabet; ///< Alphabet of parent prefix.
 		};
 
 		/// @brief Structure containing information for a substring of a prefix. This is currently only used internally.
 		struct substringAnalysisOutput : public substringAnalysisInput {
 
+			/// @brief Default constructor for substringAnalysisOutput.
 			asalib substringAnalysisOutput();
+
+			/// @brief Constructor for substringAnalysisOutput deriving from substringAnalysisInput.
+			/// @param[in] base substringAnalysisInput base.
 			asalib substringAnalysisOutput(const substringAnalysisInput& base);
 
 			types::boolean isSquare = false; ///< If the substring is an abelian square. If false, other members may not be set.
@@ -114,7 +118,12 @@ namespace AbelianSquaresAnalysis {
 		
 		/// @brief Input structure for AbelianSquaresAnalysis::prefix::SquaresCategorise for speed purposes.
 		struct SquaresCategoriseInput {
+
+			/// @brief Constructor for class
+			/// @param[in] in Reference to input list of abelian square analysis output structures
+			/// @param[in] in Reference to output list of abelian square analysis output structures
 			asalib SquaresCategoriseInput(std::vector<substringAnalysisOutput>& in, std::vector<substringAnalysisOutput>& out);
+			
 			std::vector<substringAnalysisOutput>& _in; ///< List from which entries are gathered.
 			std::vector<substringAnalysisOutput>& _out; ///< List into which sorted and equality-erased entries are output.
 			std::function<bool(substringAnalysisOutput, substringAnalysisOutput)> sort; ///< Function with which entries are sorted.

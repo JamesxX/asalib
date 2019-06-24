@@ -80,7 +80,7 @@ prefix::substringAnalysisOutput asalib AbelianSquaresAnalysis::prefix::AnalyseSu
 
 	// Count second half
 	types::parihkVector secondHalf = input.alphabet; // copy construct
-	input.word.countOccurences(input.length / 2, std::string::npos, secondHalf);
+	input.word.countOccurences(input.length / 2, input.length / 2, secondHalf);
 
 	if (firstHalf == secondHalf) {
 		output.isSquare = true;
@@ -191,8 +191,9 @@ void asalib  AbelianSquaresAnalysis::prefix::SquaresCountTrivials(prefix::prefix
 		if (square.isTrivial) {
 			input.trivial++;
 		}
-		else {
+		/*else {
 			input.nontrivial++;
-		}
+		}*/
 	}
+	input.nontrivial = input.list.size() - input.trivial;
 }

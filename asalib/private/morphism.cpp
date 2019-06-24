@@ -90,8 +90,8 @@ asalib morphismOutput AbelianSquaresAnalysis::morphism::RunMorphismSingle(morphi
 	bool k_uniform = true;
 	for (auto& morphismPair : input.morphism) {
 
-		// Check for prolongables
-		if (morphismPair.first.front() == morphismPair.second.front()) {
+		// Check for prolongables (sanitized to lower)
+		if (tolower(morphismPair.first.front()) == tolower(morphismPair.second.front())) {
 			output.morphismAnalysis.prolongable.push_back(morphismPair.first);
 		}
 

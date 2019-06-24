@@ -30,7 +30,7 @@ namespace AbelianSquaresAnalysis {
 
 			/// @brief Builds the string representation of a parihk vector, used in detail output.
 			/// @return String representation of parihk vector.
-			inline operator std::string() {
+			inline operator std::string() const {
 				bool first = true;
 				std::string output = "(";
 				for (const auto& entry : *this) {
@@ -42,32 +42,6 @@ namespace AbelianSquaresAnalysis {
 				}
 				output += ")^2";
 				return output;
-			}
-
-			/// @brief Comparison function between two parihk vectors. Commutitive.
-			/// @param[in] other Other parihk vector with which to compare.
-			/// @return Are the two parihk vectors equal.
-			inline bool operator==(const types::parihkVector& other) const {
-				return this->size() == other.size()
-					&& std::equal(this->begin(), this->end(), other.begin())
-					&& std::equal(other.begin(), other.end(), this->begin());
-			}
-
-			/// @brief Comparison function between two parihk vectors. Non-commutitive.
-			///
-			/// This function is used in the sorting algorithm when finding non-equivalent squares.
-			/// This shouldn't be used generally.
-			/// @param[in] other Other parihk vector with which to compare.
-			/// @return bool Is the parihk vector greater than another.
-			inline bool operator>(const types::parihkVector& other) const {
-				for (const auto& entry : *this) {
-					auto it = other.find(entry.first);
-					if (it == other.end()) return true;
-					if (entry.second != other.at(entry.first)) {
-						return entry.second > other.at(entry.first);
-					}
-				}
-				return false;
 			}
 
 			/// @brief Utility function for determining if the parihk vector denotes a trivial square.
