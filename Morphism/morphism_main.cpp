@@ -8,13 +8,9 @@
 #include <asalib/public/library.h>
 #include <asalib/public/morphism.hpp>
 #include <asalib/public/utility.hpp>
-#include <common/json.hpp>
 #include <common/tclap/CmdLine.h>
-#include <iostream>
 
 using namespace AbelianSquaresAnalysis;
-
-#define asalib_VERBOSE(v,...) if (v) printf(##__VA_ARGS__)
 
 
 int main(int argc, char* argv[]) {
@@ -69,7 +65,7 @@ int main(int argc, char* argv[]) {
 
 		}
 
-		asalib_VERBOSE(verboseOption, "Program completed successfull\n");
+		asalib_VERBOSE(verboseOption, "Program completed successfully\n");
 		asalib_wait_debug();
 		return 0;
 

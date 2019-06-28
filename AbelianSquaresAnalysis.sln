@@ -24,6 +24,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SingleWord", "SingleWord\Si
 		{D57EDD29-1A10-41D8-9B2E-C9EA158B18CB} = {D57EDD29-1A10-41D8-9B2E-C9EA158B18CB}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RawSquaresByBlock", "RawSquaresByBlock\RawSquaresByBlock.vcxproj", "{7A2ADDF6-E076-423E-A675-B3FB711E4248}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D57EDD29-1A10-41D8-9B2E-C9EA158B18CB} = {D57EDD29-1A10-41D8-9B2E-C9EA158B18CB}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -64,6 +69,14 @@ Global
 		{A5A5DFCF-D568-4298-8E16-1D59F25C71E0}.Release|x64.Build.0 = Release|x64
 		{A5A5DFCF-D568-4298-8E16-1D59F25C71E0}.Release|x86.ActiveCfg = Release|Win32
 		{A5A5DFCF-D568-4298-8E16-1D59F25C71E0}.Release|x86.Build.0 = Release|Win32
+		{7A2ADDF6-E076-423E-A675-B3FB711E4248}.Debug|x64.ActiveCfg = Debug|x64
+		{7A2ADDF6-E076-423E-A675-B3FB711E4248}.Debug|x64.Build.0 = Debug|x64
+		{7A2ADDF6-E076-423E-A675-B3FB711E4248}.Debug|x86.ActiveCfg = Debug|Win32
+		{7A2ADDF6-E076-423E-A675-B3FB711E4248}.Debug|x86.Build.0 = Debug|Win32
+		{7A2ADDF6-E076-423E-A675-B3FB711E4248}.Release|x64.ActiveCfg = Release|x64
+		{7A2ADDF6-E076-423E-A675-B3FB711E4248}.Release|x64.Build.0 = Release|x64
+		{7A2ADDF6-E076-423E-A675-B3FB711E4248}.Release|x86.ActiveCfg = Release|Win32
+		{7A2ADDF6-E076-423E-A675-B3FB711E4248}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,8 +86,12 @@ Global
 		{0184E74B-E134-4258-B31C-822D73830E31} = {FCBE751B-01A5-4B60-BCB2-C3B3DE2A1294}
 		{D57EDD29-1A10-41D8-9B2E-C9EA158B18CB} = {4C431DF2-B864-4D91-A37C-E6BE35491CA1}
 		{A5A5DFCF-D568-4298-8E16-1D59F25C71E0} = {FCBE751B-01A5-4B60-BCB2-C3B3DE2A1294}
+		{7A2ADDF6-E076-423E-A675-B3FB711E4248} = {FCBE751B-01A5-4B60-BCB2-C3B3DE2A1294}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {43F66DC0-6715-409A-AE54-38278579F98C}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

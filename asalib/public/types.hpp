@@ -26,7 +26,7 @@ namespace AbelianSquaresAnalysis {
 		public:
 
 			/// @brief Default constructor for parihkVector class
-			parihkVector();
+			asalib parihkVector();
 
 			/// @brief Builds the string representation of a parihk vector, used in detail output.
 			/// @return String representation of parihk vector.
@@ -34,9 +34,7 @@ namespace AbelianSquaresAnalysis {
 				bool first = true;
 				std::string output = "(";
 				for (const auto& entry : *this) {
-					if (!first) {
-						output += ", ";
-					}
+					if (!first) output += ", ";
 					output += std::to_string(entry.second);
 					first = false;
 				}
@@ -88,8 +86,18 @@ namespace AbelianSquaresAnalysis {
 			/// @warning When analyzing substrings of a greater word, the input parihk vector must be a copy construct parihk vector of the alphabet over the parent word!
 			/// @param[in] offset start point of occurences count.
 			/// @param[in] count number of positions to check.
-			/// @param[in/out] out Modified alphabet parihk vector counting occurences of given characters.
-			void countOccurences(size_t offset, size_t count, types::parihkVector& out);
+			/// @param[out] out Modified alphabet parihk vector counting occurences of given characters.
+			void asalib countOccurences(size_t offset, size_t count, types::parihkVector& out);
+		
+			/// @brief Utility function to output word in (\w)(\d+) formats
+			/// @return Pretty printed string.
+			std::string asalib prettyPrint();
+
+			/// @brief Static constructor for the word class from pretty printed format
+			/// @param[in] pretty Pretty printed word. If the word contains no matches to (\w)(\d+) then the word generated from the raw string is returned.
+			/// @return Word class for input string.
+			/// @warning If the input word is only partly in (\w)(\d+) format then the behaviour is undefined.
+			static types::word asalib fromPrettyPrint(std::string pretty);
 		};
 
 		/// @brief Function designed for use by nlohmann::json to convert AbelianSquaresAnalysis::types::word to JSON.
@@ -108,7 +116,6 @@ namespace AbelianSquaresAnalysis {
 		typedef std::map<types::word, types::word> mapping; ///< Type containing morphism information.
 		typedef std::map<std::string, mapping> morphism_list; ///< Type containing a list of morphisms.
 
+	} // namespace types
 
-	}
-
-}
+} // namespace AbelianSquaresAnalysis

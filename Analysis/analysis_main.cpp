@@ -5,16 +5,12 @@
 	Analysis.exe  -i <string> [-o <string>] [-r] [-v] [--] [--version] [-h]
 */
 
-#include <common/json.hpp>
 #include <asalib/public/library.h>
-#include <asalib/public/prefix.hpp>
+#include <asalib/public/squares.hpp>
 #include <asalib/public/utility.hpp>
 #include <common/tclap/CmdLine.h>
-#include <iostream>
 
 using namespace AbelianSquaresAnalysis;
-
-#define asalib_VERBOSE(v,...) if (v) printf(##__VA_ARGS__)
 
 int main(int argc, char* argv[]) {
 
@@ -42,8 +38,8 @@ int main(int argc, char* argv[]) {
 
 		// Analyse prefix
 		asalib_VERBOSE(verboseOption, "Analysing prefix . . .\n");
-		prefix::prefixAnalysisOutput analysisOutput(input_cpp);
-		prefix::AnalysePrefix(analysisOutput.generatedPrefix, analysisOutput);
+		squares::prefixAnalysisOutput analysisOutput(input_cpp);
+		squares::AnalyseWord(analysisOutput.generatedPrefix, analysisOutput);
 		asalib_VERBOSE(verboseOption, "Analysis complete!\n");
 
 		// Prepare output directory
@@ -58,9 +54,9 @@ int main(int argc, char* argv[]) {
 		// Output to file
 		std::string file_location = outputDirectory + "\\" + analysisOutput.input.morphismName + analysisOutput.input.startWord + ".json";
 		printf("Generating output file \"%s\"\n", file_location.c_str());
-		utility::SaveClassToFile<prefix::prefixAnalysisOutput>(file_location, analysisOutput);
+		utility::SaveClassToFile<squares::prefixAnalysisOutput>(file_location, analysisOutput);
 
-		asalib_VERBOSE(verboseOption, "Program completed successfull\n");
+		asalib_VERBOSE(verboseOption, "Program completed successfully\n");
 		asalib_wait_debug();
 		return 0;
 
@@ -72,4 +68,5 @@ int main(int argc, char* argv[]) {
 
 	asalib_wait_always();
 	return 150; // Generic error code
+
 }

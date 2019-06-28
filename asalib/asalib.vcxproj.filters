@@ -24,13 +24,19 @@
     <ClCompile Include="private\morphism.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="private\prefix.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="private\utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="private\word.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="private\squares.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="private\rawsquares.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="private\generation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -39,9 +45,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="public\morphism.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="public\prefix.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="public\thread_pool.hpp">
@@ -53,5 +56,27 @@
     <ClInclude Include="public\utility.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="public\squares.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="public\rawsquares.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="public\generation.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="asalib.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

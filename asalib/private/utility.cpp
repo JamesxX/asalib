@@ -7,7 +7,6 @@
 
 #include <fstream>
 #include <filesystem>
-#include <iomanip>
 
 nlohmann::json asalib AbelianSquaresAnalysis::utility::LoadJSONFromFile(std::string file_location) {
 	std::ifstream i(file_location);

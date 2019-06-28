@@ -53,6 +53,7 @@ namespace AbelianSquaresAnalysis {
 		/// @brief Utility function for getting absolute current executable path.
 		/// @return Absolute executable path.
 		std::string asalib CurrentExecutablePath();
-	}
 
-}
+	} // namespace utility
+
+} // namespace AbelianSquaresAnalysis

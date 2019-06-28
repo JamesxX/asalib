@@ -47,7 +47,7 @@ void asalib AbelianSquaresAnalysis::morphism::from_json(const nlohmann::json& j,
 }
 
 
-asalib std::vector<morphismOutput> AbelianSquaresAnalysis::morphism::RunMorphisms(morphismInput input) {
+std::vector<morphismOutput> asalib AbelianSquaresAnalysis::morphism::RunMorphisms(morphismInput input) {
 	// Prepare thread pool
 	AbelianSquaresAnalysis::ThreadPool<morphismOutput::inputSettings, morphismOutput> pool;
 
@@ -79,7 +79,7 @@ asalib std::vector<morphismOutput> AbelianSquaresAnalysis::morphism::RunMorphism
 
 /// @warning Undefined behaviour if a morphism is missing a mapping for a character to which it is applied. E.g if there is no mapping for 'C', yet 'C' appears in either the start word or a generated prefix.
 /// @warning Currently '0' represents mortal, however the '0' character may appear in final prefix. Consider using an empty string to represent mortal.
-asalib morphismOutput AbelianSquaresAnalysis::morphism::RunMorphismSingle(morphismOutput::inputSettings input) {
+morphismOutput asalib AbelianSquaresAnalysis::morphism::RunMorphismSingle(morphismOutput::inputSettings input) {
 
 	// Prepare output struct
 	morphismOutput output;

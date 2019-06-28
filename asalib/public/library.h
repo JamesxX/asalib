@@ -7,6 +7,7 @@
 #pragma once
 
 #include <iostream>
+#define asalib_VERBOSE(v,...) if (v) printf(##__VA_ARGS__)
 #define asalib_wait_always()\
 {\
 	printf("Press any key to continue . . .\n");\
@@ -48,4 +49,5 @@ namespace AbelianSquaresAnalysis {
 	
 	/// Build version of library.
 	extern asalib const char* BUILD;
-}
+
+} // namespace AbelianSquaresAnalysis

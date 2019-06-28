@@ -75,6 +75,7 @@ namespace AbelianSquaresAnalysis {
 		/// @return Generated prefix and associated information in AbelianSquaresAnalysis::morphism::morphismOutput type.
 		/// @see AbelianSquaresAnalysis::morphism::morphismOutput
 		asalib morphismOutput RunMorphismSingle(morphismOutput::inputSettings input);
-	}
 
-}
+	} // namespace morphism
+
+} // namespace AbelianSquaresAnalysis

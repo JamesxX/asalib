@@ -6,7 +6,7 @@
 */
 
 #include <asalib/public/library.h>
-#include <asalib/public/prefix.hpp>
+#include <asalib/public/squares.hpp>
 #include <asalib/public/types.hpp>
 #include <common/tclap/CmdLine.h>
 #include <iostream>
@@ -28,10 +28,10 @@ using namespace AbelianSquaresAnalysis;
 #define asalib_singleword_dictionary_detail "\t\t\t\"%s\" at position %zu, %s\n"
 #endif
 
-inline void PrintDetailedInformationOnType(prefix::prefixAnalysisOutputSquareType& typeOutput) {
+inline void PrintDetailedInformationOnType(squares::AnalysisOutputSquareType& typeOutput) {
 	printf(asalib_singleword_dictionary_detailedinformation);
 	for (auto& square : typeOutput.list) {
-		printf(asalib_singleword_dictionary_detail, square.word.c_str(), square.position, ((std::string)square.vector).c_str());
+		printf(asalib_singleword_dictionary_detail, types::word(square.square).prettyPrint().c_str(), square.position, ((std::string)square.vector).c_str());
 	}
 }
 
@@ -59,9 +59,11 @@ int main(int argc, char* argv[]) {
 		// For every input word
 		for (const auto& word : inputWords) {
 
-			asalib_VERBOSE(verboseOption, "Analysing \"%s\" . . .\n", word.c_str());
-			prefix::AnalysePrefixOutput wordOutput;
-			prefix::AnalysePrefix(word, wordOutput);
+			types::word cpp = types::word::fromPrettyPrint(word);
+
+			asalib_VERBOSE(verboseOption, "Analysing \"%s\" . . .\n", cpp.c_str());
+			squares::AnalysisOutput wordOutput;
+			squares::AnalyseWord(cpp, wordOutput);
 
 			asalib_singleword_type_output(total, wordOutput, detailedOption);
 			asalib_singleword_type_output(distinct, wordOutput, detailedOption);
@@ -69,7 +71,7 @@ int main(int argc, char* argv[]) {
 
 		}
 
-		asalib_VERBOSE(verboseOption, "Program completed successfull\n");
+		asalib_VERBOSE(verboseOption, "Program completed successfully\n");
 		asalib_wait_debug();
 		return 0;
 

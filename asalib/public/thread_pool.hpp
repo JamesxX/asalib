@@ -13,7 +13,6 @@
 #include <chrono>
 
 namespace AbelianSquaresAnalysis {
-	
 
 	/// @brief Helper class for running asynchronous tasks on multiple threads.
 	/// Used to speed up certain expensive functions
@@ -69,4 +68,4 @@ namespace AbelianSquaresAnalysis {
 		std::vector<std::future<_argsOut>> futures_pool; ///< Private vector of futures for asynchronous tasks.
 	};
 
-};
+} // namespace AbelianSquaresAnalysis
