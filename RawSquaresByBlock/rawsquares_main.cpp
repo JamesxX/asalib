@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
 		unsigned int inMaxLength = cmd_inMaxLength.getValue();
 
 		squares::raw::isRawSquareOutputReason outputCode;
-		std::vector<std::string> squares = generation::binary::generateSquaresX({ inNumBlocks, inMaxLength });
+		std::vector<std::string> squares = generation::binary::generateSquares({ inNumBlocks, inMaxLength });
 		
 		for (auto& square : squares) {
 			bool isRaw = isRawSquare(square, outputCode);
