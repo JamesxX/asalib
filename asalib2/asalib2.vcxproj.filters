@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\types">
+      <UniqueIdentifier>{c6568c47-4d8b-4c96-a3b7-f14efb9fadcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\algorithms">
+      <UniqueIdentifier>{c5a94232-ac42-4f6e-bf7a-0aabbdc3a153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\algorithms\generation">
+      <UniqueIdentifier>{d7d251db-adb3-4449-8bf3-f02793f46c0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\algorithms\analysis">
+      <UniqueIdentifier>{776c8afa-0b3f-4dfe-8e62-fb91673c4a1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\types">
+      <UniqueIdentifier>{ca6d9988-3e54-4670-8322-dcb2463f7e26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\algorithms">
+      <UniqueIdentifier>{858f4d7a-ab0f-4116-855c-135734d41fc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\algorithms\generation">
+      <UniqueIdentifier>{13e5eeb5-f6e8-448d-b052-e62bb772e9c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\algorithms\analysis">
+      <UniqueIdentifier>{36001152-5359-49e1-82b8-0ee98b8a4a1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\literals">
+      <UniqueIdentifier>{ba5a66c4-bed6-46a1-952b-8da47244878f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\types\exception">
+      <UniqueIdentifier>{88ba438d-7720-4cd3-a104-1fd60461baef}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="public\fwd.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="public\types\morphism.hpp">
+      <Filter>Header Files\types</Filter>
+    </ClInclude>
+    <ClInclude Include="public\types\parihkVector.hpp">
+      <Filter>Header Files\types</Filter>
+    </ClInclude>
+    <ClInclude Include="public\types\word.hpp">
+      <Filter>Header Files\types</Filter>
+    </ClInclude>
+    <ClInclude Include="public\library.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="public\literals\prettyWord.hpp">
+      <Filter>Header Files\literals</Filter>
+    </ClInclude>
+    <ClInclude Include="public\types\exception\notImplemented.hpp">
+      <Filter>Header Files\types\exception</Filter>
+    </ClInclude>
+    <ClInclude Include="public\constants.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="public\types\generator.hpp">
+      <Filter>Header Files\types</Filter>
+    </ClInclude>
+    <ClInclude Include="public\algorithms\analysis\stringContainsDigits.hpp">
+      <Filter>Header Files\algorithms\analysis</Filter>
+    </ClInclude>
+    <ClInclude Include="public\types\exception\badConstruction.hpp">
+      <Filter>Header Files\types\exception</Filter>
+    </ClInclude>
+    <ClInclude Include="public\algorithms\generation\applyMorphismUntilLength.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="public\algorithms\generation\allWordsOfBlockCountUntilLength.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="public\algorithms\generation\genericWord.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="public\algorithms\analysis\allSquares.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="public\algorithms\analysis\rawSquare.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="public\algorithms\analysis\categoriseSquares.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="private\library.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="private\types\parihkVector.cpp">
+      <Filter>Source Files\types</Filter>
+    </ClCompile>
+    <ClCompile Include="private\constants.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="private\types\word.cpp">
+      <Filter>Source Files\types</Filter>
+    </ClCompile>
+    <ClCompile Include="private\types\morphism.cpp">
+      <Filter>Source Files\types</Filter>
+    </ClCompile>
+    <ClCompile Include="private\algorithms\generation\allWordsOfBlockCountUntilLength.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="private\algorithms\analysis\allSquares.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="private\algorithms\analysis\rawSquare.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="private\algorithms\analysis\categoriseSquares.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

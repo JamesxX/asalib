@@ -5,23 +5,20 @@ mkdir __%version%
 mkdir __%version%\x86
 @echo off
 mkdir __%version%\x64
-mkdir __%version%\asalib\public
+mkdir __%version%\asalib2\public
 mkdir __%version%\Docs
 
-xcopy /s asalib\public __%version%\asalib\public
+xcopy /s asalib2\public __%version%\asalib2\public
 ( type Doxyfile & echo PROJECT_NUMBER=%version% ) | doxygen.exe -
 xcopy /s Docs __%version%\Docs
 rmdir /S /Q Docs\
 
-
-call:CopyFilexXX AbelianSquaresAnalysis.bat
-call:CopyFilexXX Analysis.exe
-call:CopyFilexXX asalib.dll
-call:CopyFilexXX asalib.lib
-call:CopyFilexXX ExampleMorphism.morph
-call:CopyFilexXX Morphism.exe
-call:CopyFilexXX SingleWord.exe
-call:CopyFilexXX RawSquaresByBlock.exe
+call:CopyFilexXX asalib2.dll
+call:CopyFilexXX asalib2.lib
+call:CopyFilexXX singleword2.exe
+call:CopyFilexXX generateForBlocksAndLength.exe
+call:CopyFilexXX rawSquareByBlock.exe
+call:CopyFilexXX morphism.exe
 echo.&pause&goto:eof
 
 :CopyFilexXX
