@@ -20,7 +20,7 @@ asalib allSquares_ns::squares_t allSquares_ns::allSquares
 
 	types::parihkVector temporaryVector;
 
-	for (types::size position = 0; position < (inputLength - 2); position++)
+	for (types::size position = 0; position < (inputLength - 1); position++)
 	{
 		for (types::size length = 2; length <= (inputLength - position); length += 2)
 		{
@@ -37,38 +37,26 @@ asalib allSquares_ns::squares_t allSquares_ns::allSquares
 					length
 				};
 
-				if (haltingFn != nullptr)
-				{
-					if (haltingFn(info))
-					{
-
-					}
-				}
-
 				if (temporaryVector.isTrivial())
 				{
 
-					output.m_Trivial.list.push_back({
-						temporaryVector, // Copy
-						subword, // Copy
-						position,
-						length
-					});
-
+					output.m_Trivial.list.emplace_back(info);
 					output.m_Trivial.count++;
 				}
 				else
 				{
-					output.m_NonTrivial.list.push_back({
-						temporaryVector, // Copy
-						subword, // Copy
-						position,
-						length
-					});
-
+					output.m_NonTrivial.list.emplace_back(info);
 					output.m_NonTrivial.count++;
 				}
 				output.count++;
+
+				if (haltingFn != nullptr)
+				{
+					if (haltingFn(info))
+					{
+						return output;
+					}
+				}
 			}
 		}
 	}

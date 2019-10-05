@@ -45,9 +45,9 @@ void computationalResults(
 	bool verboseOption = false)
 {
 	printf("\tComputational results:\n");
-	printf("\t\tTotal non-trivial squares against length : %zu / %zu = %f\n", output.m_All.m_NonTrivial.count, length, ((float) output.m_All.m_NonTrivial.count) / length);
-	printf("\t\tDistinct non-trivial squares against length : %zu / %zu = %f\n", output.m_Distinct.m_NonTrivial.count, length, ((float)output.m_Distinct.m_NonTrivial.count) / length);
-	printf("\t\tNon-equivalent non-trivial squares against length : %zu / %zu = %f\n", output.m_Nonequivalent.m_NonTrivial.count, length, ((float)output.m_Nonequivalent.m_NonTrivial.count) / length);
+	printf("\t\tTotal a-squares against length : %zu / %zu = %f\n", output.m_All.count, length, ((float) output.m_All.count) / length);
+	printf("\t\tDistinct a-squares against length : %zu / %zu = %f\n", output.m_Distinct.count, length, ((float)output.m_Distinct.count) / length);
+	printf("\t\tNon-equivalent a-squares against length : %zu / %zu = %f\n", output.m_Nonequivalent.count, length, ((float)output.m_Nonequivalent.count) / length);
 	printf("-------------------------------------------\n");
 }
 

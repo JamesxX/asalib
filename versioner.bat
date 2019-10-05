@@ -17,6 +17,7 @@ call:CopyFilexXX asalib2.dll
 call:CopyFilexXX asalib2.lib
 call:CopyFilexXX singleword2.exe
 call:CopyFilexXX generateForBlocksAndLength.exe
+call:CopyFilexXX generatedToSingleWord.bat
 call:CopyFilexXX rawSquareByBlock.exe
 call:CopyFilexXX morphism.exe
 echo.&pause&goto:eof

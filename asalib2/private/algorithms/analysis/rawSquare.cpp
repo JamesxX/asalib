@@ -29,7 +29,7 @@ asalib types::boolean analysis::isRawSquare
 	}
 
 	// CHANGE BELOW
-	if (analysis::allSquares(input).m_NonTrivial.count != 1)
+	if (analysis::allSquares(input, [](const square_info_t& info) {return info.m_Vector.isTrivial();}).m_NonTrivial.count != 1)
 	{
 		return false;
 	}

@@ -72,6 +72,7 @@ namespace asalib2_ns
 			inline namespace _categoriseSquares
 			{
 				struct categorised_squares_t;
+				typedef bool(*binaryPredicateCategorise_t)(const square_info_t& left, const square_info_t& right);
 			} // inline namespace _categoriseSquares
 
 		} // namespace analysis

@@ -25,6 +25,15 @@ namespace asalib2_ns
 					squares_t m_Nonequivalent;
 				};
 
+				asalib bool DistinctSort(const square_info_t& left, const square_info_t& right);
+				asalib bool DistinctComp(const square_info_t& left, const square_info_t& right);
+				asalib bool NonequivalentSort(const square_info_t& left, const square_info_t& right);
+				asalib bool NonequivalentComp(const square_info_t& left, const square_info_t& right);
+
+				asalib2_likely
+				asalib
+				void generateSubset(squares_t& src, squares_t& dst, binaryPredicateCategorise_t sort, binaryPredicateCategorise_t comp);
+
 				asalib2_likely
 				asalib categorised_squares_t categoriseSquares(const _allSquares::squares_t& squares);
 

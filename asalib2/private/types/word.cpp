@@ -224,10 +224,7 @@ asalib word& word::operator+=(const word& other)
 		it++;
 	}
 
-	for (; it != other.m_blocks.end(); it++)
-	{
-		m_blocks.emplace_back(*it);
-	}
+	m_blocks.insert(m_blocks.end(), it, other.m_blocks.end());
 
 	return *this;
 }
