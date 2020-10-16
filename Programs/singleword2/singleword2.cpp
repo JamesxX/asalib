@@ -87,7 +87,7 @@ int main(int argc, char* argv[]) {
 			printf("Analysing \"%s\" . . .\n", ((std::string)input).c_str());
 
 			auto analysisOutput = asalib2_ns::algorithms::analysis::categoriseSquares(
-				asalib2_ns::algorithms::analysis::allSquares(input)
+				asalib2_ns::algorithms::analysis::allSquares_async(input)
 			);
 
 			categoricalSummary(analysisOutput, input.length(), detailedOption, verboseOption);

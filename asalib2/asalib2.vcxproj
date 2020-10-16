@@ -30,6 +30,10 @@
     <ClInclude Include="public\fwd.hpp" />
     <ClInclude Include="public\library.hpp" />
     <ClInclude Include="public\literals\prettyWord.hpp" />
+    <ClInclude Include="public\multithreading\cThreadManager.hpp" />
+    <ClInclude Include="public\multithreading\jthread.hpp" />
+    <ClInclude Include="public\multithreading\latch.hpp" />
+    <ClInclude Include="public\multithreading\stop_token.hpp" />
     <ClInclude Include="public\types\exception\badConstruction.hpp" />
     <ClInclude Include="public\types\exception\notImplemented.hpp" />
     <ClInclude Include="public\types\generator.hpp" />
@@ -44,6 +48,7 @@
     <ClCompile Include="private\algorithms\generation\allWordsOfBlockCountUntilLength.cpp" />
     <ClCompile Include="private\constants.cpp" />
     <ClCompile Include="private\library.cpp" />
+    <ClCompile Include="private\multithreading\cThreadManager.cpp" />
     <ClCompile Include="private\types\morphism.cpp" />
     <ClCompile Include="private\types\parihkVector.cpp" />
     <ClCompile Include="private\types\word.cpp" />
@@ -102,25 +107,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\james\Documents\GitHub\asalib;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\james\source\repos\asalib;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\james\Documents\GitHub\asalib;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\james\source\repos\asalib;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\james\Documents\GitHub\asalib;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\james\source\repos\asalib;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\james\Documents\GitHub\asalib;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\james\source\repos\asalib;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>

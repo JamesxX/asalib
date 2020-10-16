@@ -43,6 +43,7 @@ namespace asalib2_ns
 
 				asalib2_likely
 				asalib squares_t allSquares(const types::word& input, haltingPredicate = nullptr);
+				asalib squares_t allSquares_async(const types::word& input);
 
 			} // inline namespace _allSquares
 

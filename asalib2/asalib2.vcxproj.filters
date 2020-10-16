@@ -43,6 +43,12 @@
     <Filter Include="Header Files\types\exception">
       <UniqueIdentifier>{88ba438d-7720-4cd3-a104-1fd60461baef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\multithreading">
+      <UniqueIdentifier>{35feeccf-bccf-43e5-b7a8-4ef84cbb9018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\multithreading">
+      <UniqueIdentifier>{f3415108-f915-4f1f-a468-4aafca5ff3d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="public\fwd.hpp">
@@ -78,23 +84,35 @@
     <ClInclude Include="public\types\exception\badConstruction.hpp">
       <Filter>Header Files\types\exception</Filter>
     </ClInclude>
-    <ClInclude Include="public\algorithms\generation\applyMorphismUntilLength.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="public\multithreading\cThreadManager.hpp">
+      <Filter>Header Files\multithreading</Filter>
     </ClInclude>
-    <ClInclude Include="public\algorithms\generation\allWordsOfBlockCountUntilLength.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="public\multithreading\jthread.hpp">
+      <Filter>Header Files\multithreading</Filter>
     </ClInclude>
-    <ClInclude Include="public\algorithms\generation\genericWord.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="public\multithreading\latch.hpp">
+      <Filter>Header Files\multithreading</Filter>
+    </ClInclude>
+    <ClInclude Include="public\multithreading\stop_token.hpp">
+      <Filter>Header Files\multithreading</Filter>
     </ClInclude>
     <ClInclude Include="public\algorithms\analysis\allSquares.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\algorithms\analysis</Filter>
     </ClInclude>
-    <ClInclude Include="public\algorithms\analysis\rawSquare.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="public\algorithms\generation\allWordsOfBlockCountUntilLength.hpp">
+      <Filter>Header Files\algorithms\generation</Filter>
+    </ClInclude>
+    <ClInclude Include="public\algorithms\generation\applyMorphismUntilLength.hpp">
+      <Filter>Header Files\algorithms\generation</Filter>
     </ClInclude>
     <ClInclude Include="public\algorithms\analysis\categoriseSquares.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\algorithms\analysis</Filter>
+    </ClInclude>
+    <ClInclude Include="public\algorithms\generation\genericWord.hpp">
+      <Filter>Header Files\algorithms\generation</Filter>
+    </ClInclude>
+    <ClInclude Include="public\algorithms\analysis\rawSquare.hpp">
+      <Filter>Header Files\algorithms\analysis</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -113,17 +131,20 @@
     <ClCompile Include="private\types\morphism.cpp">
       <Filter>Source Files\types</Filter>
     </ClCompile>
+    <ClCompile Include="private\multithreading\cThreadManager.cpp">
+      <Filter>Source Files\multithreading</Filter>
+    </ClCompile>
     <ClCompile Include="private\algorithms\generation\allWordsOfBlockCountUntilLength.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\algorithms\generation</Filter>
     </ClCompile>
     <ClCompile Include="private\algorithms\analysis\allSquares.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="private\algorithms\analysis\rawSquare.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\algorithms\analysis</Filter>
     </ClCompile>
     <ClCompile Include="private\algorithms\analysis\categoriseSquares.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\algorithms\analysis</Filter>
+    </ClCompile>
+    <ClCompile Include="private\algorithms\analysis\rawSquare.cpp">
+      <Filter>Source Files\algorithms\analysis</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
